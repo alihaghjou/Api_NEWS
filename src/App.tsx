@@ -41,7 +41,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="Api_NEWS" element={<Layout />}>
         <Route index element={<Lists news={news} />} />
         <Route path=":id" element={<Article article={news} />} />
       </Route>
