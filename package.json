@@ -2,7 +2,7 @@
   "name": "api",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://alihaghjou30.github.io/Api_NEWS",
+  "homepage": "https://alihaghjou30.github.io/Api_NEWS/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
