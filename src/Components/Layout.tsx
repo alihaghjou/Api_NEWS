@@ -14,7 +14,7 @@ function Layout() {
         Copyright &copy; {year}, Designed by Ali
       </footer>
       <div className="fixed right-2 bottom-10 text-slate-100">
-        <a href="https://github.com/alihaghjou/API-News">
+        <a href="https://github.com/alihaghjou/Api_NEWS">
           <AiFillGithub size="40px" />
         </a>
       </div>
