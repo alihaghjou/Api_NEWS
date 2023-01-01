@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import Article from "./Components/Article";
 import Layout from "./Components/Layout";
 import Lists from "./Components/Lists";
+import useSWR from "swr";
 
 export interface news {
   id: number;
@@ -19,31 +19,23 @@ export interface news {
 }
 
 function App() {
-  const url = "https://api.spaceflightnewsapi.net/v3/articles";
-  const [news, setnews] = useState<news[]>([]);
-  const effectRun = useRef(false);
+  const {
+    data: news,
+    isLoading,
+    error,
+  } = useSWR<news[]>("https://api.spaceflightnewsapi.net/v3/articles", (url) =>
+    fetch(url).then((r) => r.json())
+  );
 
-  useEffect(() => {
-    if (effectRun.current === false) {
-      gettingdata(url);
-    }
-
-    return () => {
-      effectRun.current = true;
-    };
-  }, []);
-
-  async function gettingdata(url: RequestInfo | URL) {
-    const response = await fetch(url);
-    const data = await response.json();
-    setnews(data);
-  }
-
+  if (error) return <div>Error</div>;
   return (
     <Routes>
       <Route path="Api_NEWS" element={<Layout />}>
-        <Route index element={<Lists news={news} />} />
-        <Route path=":id" element={<Article article={news} />} />
+        <Route index element={<Lists news={news} isLoading={isLoading} />} />
+        <Route
+          path=":id"
+          element={<Article article={news} isLoading={isLoading} />}
+        />
       </Route>
     </Routes>
   );

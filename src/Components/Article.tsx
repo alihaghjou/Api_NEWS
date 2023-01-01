@@ -2,9 +2,18 @@ import React from "react";
 import { news } from "../App";
 import { useParams, useNavigate } from "react-router-dom";
 
-const Article: React.FC<{ article: news[] }> = ({ article }) => {
+const Article = ({
+  article,
+  isLoading,
+}: {
+  article: news[] | undefined;
+  isLoading: boolean;
+}) => {
   const navigate = useNavigate();
   const { id } = useParams();
+  if (isLoading) return <div>Loading...</div>;
+  if (article === undefined) return null
+
   const item = article.find((items) => items.id.toString() === id);
 
   async function handleClick(

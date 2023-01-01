@@ -2,7 +2,15 @@ import React from "react";
 import Links from "./Links";
 import { news } from "../App";
 
-const Lists: React.FC<{ news: news[] }> = ({ news }) => {
+const Lists = ({
+  news,
+  isLoading,
+}: {
+  news: news[] | undefined;
+  isLoading: boolean;
+}) => {
+  if (isLoading && !news) return <div>Loading...</div>;
+  if (news === undefined) return null;
   return (
     <main>
       <ul>
