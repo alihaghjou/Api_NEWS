@@ -1,6 +1,7 @@
 import React from "react";
 import { news } from "../App";
 import { useParams, useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 const Article = ({
   article,
@@ -11,8 +12,10 @@ const Article = ({
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  if (isLoading) return <div>Loading...</div>;
-  if (article === undefined) return null
+
+  if (isLoading) return <Loading />;
+
+  if (article === undefined) return null;
 
   const item = article.find((items) => items.id.toString() === id);
 
@@ -33,7 +36,11 @@ const Article = ({
           <img src={item.imageUrl} alt="News" className="w-3/5 mx-auto" />
           <p className="py-5">{item.summary}</p>
           <p className="py-3">
-            For more visit <a href={item.url}>here</a>.
+            For more visit{" "}
+            <a href={item.url} className="text-cyan-600 hover:underline">
+              here
+            </a>
+            .
           </p>
           <p className="mb-5">Published at {item.publishedAt}</p>
           <button

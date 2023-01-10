@@ -1,6 +1,6 @@
-import React from "react";
 import Links from "./Links";
 import { news } from "../App";
+import Loading from "./Loading";
 
 const Lists = ({
   news,
@@ -9,7 +9,9 @@ const Lists = ({
   news: news[] | undefined;
   isLoading: boolean;
 }) => {
-  if (isLoading && !news) return <div>Loading...</div>;
+  if (isLoading && !news) {
+    return <Loading />;
+  }
   if (news === undefined) return null;
   return (
     <main>
